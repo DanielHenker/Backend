@@ -1,0 +1,32 @@
+{
+  "name": "proyecto-clase",
+  "version": "1.0.0",
+  "description": "Práctica, aprendiendo a usar y crear proyectos con Node.js",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "node.js",
+    "api rest",
+    "express",
+    "javascript"
+  ],
+  "author": "Daniel Henker",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.9.0",
+      "onFail": "download"
+    }
+  },
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.7.3",
+    "nodemon": "^3.1.14"
+  }
+}
