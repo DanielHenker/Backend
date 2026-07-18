@@ -15,8 +15,14 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-
+    },
+    role: {
+        type: String,
+        enum: ['admin', 'usuario'],
+        default: 'usuario'
     }
-
-
 });
+
+// 3. Exportar el modelo
+export default mongoose.model('User', userSchema);
+
