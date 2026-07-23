@@ -29,4 +29,4 @@ const productSchema = new mongoose.Schema({
 });
 
 // 3. Exportar el modelo
-export default mongoose.model('Product', productSchema);
+export const productModel = mongoose.model('Product', productSchema);

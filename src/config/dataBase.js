@@ -10,7 +10,7 @@ dns.setServers(['8.8.8.8', '1.1.1.1']);
 
 export async function connectionMongo() {
 
-    //Manejo de errores
+    // Manejo de errores
     try {
         await mongoose.connect(process.env.URI_MONGO)
         console.log('Conexión exitosa a la base de datos');
