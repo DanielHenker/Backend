@@ -1,7 +1,6 @@
 # Backend Consultorio Odontológico
 
-Backend del proyecto de consultorio odontológico entregado para el final del módulo 1. 
-Este proyecto está desarrollado con Node.js, Express y MongoDB, y constituye la continuación del sitio web estático  hacia una API REST con persistencia de datos, como parte del Módulo 2 del bootcamp BIT.
+Backend del proyecto de consultorio odontológico. Este servicio está desarrollado con Node.js, Express y MongoDB, y constituye la continuación del sitio web estático (Módulo 1) hacia una API REST con persistencia de datos, como parte del Módulo 2 del bootcamp BIT (Build, Innovate, Transform).
 
 ## Descripción del proyecto
 
@@ -24,7 +23,7 @@ Este backend sienta la base para administrar la información del consultorio, co
 
 Antes de ejecutar el proyecto asegúrate de tener instalado:
 
-- Node.js
+- Node.js 18 o superior
 - pnpm (recomendado) o npm
 - Una conexión válida a un cluster de MongoDB Atlas
 
@@ -52,13 +51,31 @@ USER_MONGO=tu_usuario
 PASSWORD_MONGO=tu_password
 ```
 
+> Nunca subas tu archivo `.env` real al repositorio. Asegúrate de que esté incluido en tu `.gitignore`.
+
+## Ejecución
+
+Para iniciar el servidor en modo desarrollo (con recarga automática):
+
+```bash
+pnpm dev
+```
+
+Para iniciar el servidor en modo producción:
+
+```bash
+pnpm start
+```
+
 Una vez ejecutado, el servicio estará disponible en:
 
 ```
 http://localhost:3000
 ```
 
-Estructura del proyecto
+## Estructura del proyecto
+
+```
 Backend/
 ├── app.js
 ├── package.json
@@ -74,37 +91,52 @@ Backend/
     └── routes/
         ├── products.routes.js
         └── users.routes.js
+```
 
 ## Scripts disponibles
 
 - `pnpm start`: inicia el servidor con Node.js
 - `pnpm dev`: inicia el servidor con Nodemon para desarrollo
 
-Rutas actuales
-Ruta de prueba
-GET / → devuelve un mensaje indicando que el backend está funcionando
-Usuarios (/usuarios)
-Método	Endpoint	Descripción
-POST	/usuarios/registrar	Registra un nuevo usuario (contraseña encriptada con bcrypt)
-GET	/usuarios/mostrar	Obtiene todos los usuarios registrados
-POST	/usuarios/iniciar-sesion	Inicia sesión y devuelve un token JWT
-PUT	/usuarios/actualizar/:id	Actualiza un usuario existente por su ID
-DELETE	/usuarios/eliminar/:id	Elimina un usuario existente por su ID
-Servicios (/productos)
-Método	Endpoint	Descripción
-POST	/productos/crear	Crea un nuevo servicio odontológico
-GET	/productos/mostrar	Obtiene todos los servicios registrados
-PUT	/productos/actualizar/:id	Actualiza un servicio existente por su ID
-DELETE	/productos/eliminar/:id	Elimina un servicio existente por su ID
-Variables de entorno
-Variable	Descripción
-PORT	Puerto en el que correrá el servidor
-URI_MONGO	URI de conexión a MongoDB Atlas
-USER_MONGO	Usuario de la base de datos
-PASSWORD_MONGO	Contraseña de la base de datos
-JWT_SECRET	Clave secreta usada para firmar los tokens de autenticación (JWT)
-Autores
-Daniel Henker — Desarrollador único del proyecto (backend, modelado de datos y documentación)
-Estado del proyecto
+## Rutas actuales
+
+### Ruta de prueba
+
+- `GET /` → devuelve un mensaje indicando que el backend está funcionando
+
+### Usuarios (`/usuarios`)
+
+| Método | Endpoint | Descripción |
+|---|---|---|
+| `POST` | `/usuarios/registrar` | Registra un nuevo usuario (contraseña encriptada con bcrypt) |
+| `GET` | `/usuarios/mostrar` | Obtiene todos los usuarios registrados |
+| `POST` | `/usuarios/iniciar-sesion` | Inicia sesión y devuelve un token JWT |
+| `PUT` | `/usuarios/actualizar/:id` | Actualiza un usuario existente por su ID |
+| `DELETE` | `/usuarios/eliminar/:id` | Elimina un usuario existente por su ID |
+
+### Servicios (`/productos`)
+
+| Método | Endpoint | Descripción |
+|---|---|---|
+| `POST` | `/productos/crear` | Crea un nuevo servicio odontológico |
+| `GET` | `/productos/mostrar` | Obtiene todos los servicios registrados |
+| `PUT` | `/productos/actualizar/:id` | Actualiza un servicio existente por su ID |
+| `DELETE` | `/productos/eliminar/:id` | Elimina un servicio existente por su ID |
+
+## Variables de entorno
+
+| Variable | Descripción |
+|---|---|
+| `PORT` | Puerto en el que correrá el servidor |
+| `URI_MONGO` | URI de conexión a MongoDB Atlas |
+| `USER_MONGO` | Usuario de la base de datos |
+| `PASSWORD_MONGO` | Contraseña de la base de datos |
+| `JWT_SECRET` | Clave secreta usada para firmar los tokens de autenticación (JWT) |
+
+## Autores
+
+- **Daniel Henker** — Desarrollador único del proyecto (backend, modelado de datos y documentación)
+
+## Estado del proyecto
 
 En desarrollo. Esta entrega implementa la funcionalidad CRUD completa (crear, leer, actualizar y eliminar) para los modelos de Usuario y Servicios, junto con autenticación básica mediante JWT. Las siguientes iteraciones incluirán pruebas de endpoints con Postman y mejoras adicionales de seguridad y validación.
