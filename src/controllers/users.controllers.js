@@ -128,3 +128,60 @@ export const loginUser = async (req, res) => {
     });
   }
 };
+
+// petición PUT -> actualizar un usuario en particular -> actualizar por ID
+export const updateUserById = async (req, res) => {
+  try {
+    let idForUpdate = req.params.id;
+    let dataForUpdate = req.body;
+
+    // si la actualización incluye una nueva contraseña, la encriptamos antes de guardarla
+    if (dataForUpdate.password) {
+      dataForUpdate.password = await bcrypt.hash(dataForUpdate.password, 10);
+    }
+
+    const userUpdated = await userModel.findByIdAndUpdate(idForUpdate, dataForUpdate, { new: true });
+
+    if (!userUpdated) {
+      return res.status(404).json({
+        mensaje: 'No se encontró usuario para actualizar'
+      });
+    }
+
+    return res.status(200).json({
+      mensaje: 'Se actualizó el usuario correctamente',
+      datos: userUpdated
+    });
+
+  } catch (error) {
+    return res.status(400).json({
+      mensaje: 'Ocurrió un error al actualizar usuario',
+      problema: error || error.message
+    });
+  }
+};
+
+// petición DELETE -> eliminar un usuario en particular -> eliminar por ID
+export const deleteUserById = async (req, res) => {
+  try {
+    let idForDelete = req.params.id;
+
+    const userDeleted = await userModel.findByIdAndDelete(idForDelete);
+
+    if (!userDeleted) {
+      return res.status(404).json({
+        mensaje: 'No se encontró usuario para eliminar'
+      });
+    }
+
+    return res.status(200).json({
+      mensaje: 'Usuario eliminado satisfactoriamente'
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      mensaje: 'Ocurrió un error al eliminar usuario',
+      problema: error || error.message
+    });
+  }
+};
