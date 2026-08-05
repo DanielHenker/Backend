@@ -2,7 +2,7 @@
 // 1. Importar dependencias y módulos que necesitemos
 // Importar las dependencias de encriptación
 
-import { userModel } from '../models/user.model.js';
+import { userModel } from '../models/users.model.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
@@ -56,7 +56,7 @@ export const showUsers = async (req, res) => {
     }
 
     return res.status(200).json({
-        menasaje: 'Se encontraron usuarios almacenados',
+        mensaje: 'Se encontraron usuarios almacenados',
         numeroUsuarios: users.length,
         datos: users
     })

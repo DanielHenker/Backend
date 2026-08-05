@@ -1,7 +1,7 @@
-import { postProduct } from '../controllers/products.controller.js';
-import { getProduct } from '../controllers/products.controller.js';
-import { putProductById } from '../controllers/products.controller.js';
-import { deleteProductById } from '../controllers/products.controller.js';
+import { postProduct } from '../controllers/products.controllers.js';
+import { getProduct } from '../controllers/products.controllers.js';
+import { putProductById } from '../controllers/products.controllers.js';
+import { deleteProductById } from '../controllers/products.controllers.js';
 import express from 'express';
 
 // 1. configurar el router - express.Router()
