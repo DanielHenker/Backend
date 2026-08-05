@@ -58,30 +58,53 @@ Una vez ejecutado, el servicio estará disponible en:
 http://localhost:3000
 ```
 
-## Estructura del proyecto
-
-```
+Estructura del proyecto
 Backend/
 ├── app.js
 ├── package.json
 └── src/
     ├── config/
+    │   └── dataBase.js
     ├── controllers/
+    │   ├── products.controllers.js
+    │   └── users.controllers.js
     ├── models/
+    │   ├── products.model.js
+    │   └── users.model.js
     └── routes/
-```
+        ├── products.routes.js
+        └── users.routes.js
 
 ## Scripts disponibles
 
 - `pnpm start`: inicia el servidor con Node.js
 - `pnpm dev`: inicia el servidor con Nodemon para desarrollo
 
-## Rutas actuales
+Rutas actuales
+Ruta de prueba
+GET / → devuelve un mensaje indicando que el backend está funcionando
+Usuarios (/usuarios)
+Método	Endpoint	Descripción
+POST	/usuarios/registrar	Registra un nuevo usuario (contraseña encriptada con bcrypt)
+GET	/usuarios/mostrar	Obtiene todos los usuarios registrados
+POST	/usuarios/iniciar-sesion	Inicia sesión y devuelve un token JWT
+PUT	/usuarios/actualizar/:id	Actualiza un usuario existente por su ID
+DELETE	/usuarios/eliminar/:id	Elimina un usuario existente por su ID
+Servicios (/productos)
+Método	Endpoint	Descripción
+POST	/productos/crear	Crea un nuevo servicio odontológico
+GET	/productos/mostrar	Obtiene todos los servicios registrados
+PUT	/productos/actualizar/:id	Actualiza un servicio existente por su ID
+DELETE	/productos/eliminar/:id	Elimina un servicio existente por su ID
+Variables de entorno
+Variable	Descripción
+PORT	Puerto en el que correrá el servidor
+URI_MONGO	URI de conexión a MongoDB Atlas
+USER_MONGO	Usuario de la base de datos
+PASSWORD_MONGO	Contraseña de la base de datos
+JWT_SECRET	Clave secreta usada para firmar los tokens de autenticación (JWT)
+Autores
+Daniel Henker — Desarrollador único del proyecto (backend, modelado de datos y documentación)
+Estado del proyecto
 
-Actualmente el backend expone una ruta de prueba para verificar que el servicio funciona:
-
-- `GET /` → devuelve un mensaje indicando que el backend está funcionando
-
-## Autor
-
-Daniel Henker
+En desarrollo. Esta entrega implementa la funcionalidad CRUD completa (crear, leer, actualizar y eliminar) para los modelos de Usuario y Servicios, junto con autenticación básica mediante JWT. Las siguientes iteraciones incluirán pruebas de endpoints con Postman y mejoras adicionales de seguridad y validación.
