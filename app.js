@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 import { connectionMongo } from './src/config/dataBase.js'
 import { userRouter } from './src/routes/users.routes.js'
 import { productsRouter } from './src/routes/products.routes.js'
-
+import { appointmentsRouter } from './src/routes/appointments.routes.js'
 
 // 2. crear las configuraciones necesarias para el servidor
 const app = express() //llamar a express para crear la aplicación
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 
 app.use('/usuarios', userRouter)
 app.use('/productos', productsRouter)
-
+app.use('/citas', appointmentsRouter)
 
 // 4. levantar el servidor
 app.listen(port, () => {

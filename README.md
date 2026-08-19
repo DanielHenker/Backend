@@ -1,13 +1,16 @@
 # Backend Consultorio Odontológico
 
-Backend del proyecto de consultorio odontológico. Este servicio está desarrollado con Node.js, Express y MongoDB, y constituye la continuación del sitio web estático (Módulo 1) hacia una API REST con persistencia de datos, como parte del Módulo 2 del bootcamp BIT (Build, Innovate, Transform).
+API REST desarrollada con Node.js, Express y MongoDB para la gestión digital de un consultorio odontológico real. El proyecto surge como continuación del sitio web estático desarrollado en el Módulo 1 del bootcamp BIT (Build, Innovate, Transform), y en este Módulo 2 se construye el backend que le da soporte funcional.
+
+El consultorio ofrece distintos **servicios odontológicos** (limpieza dental, ortodoncia, blanqueamiento, entre otros), los cuales los **pacientes** pueden consultar y **agendar** en un horario específico. Este backend modela justamente ese flujo de negocio: gestión de usuarios (pacientes y administradores), catálogo de servicios ofrecidos, y un sistema de **agenda de citas** que conecta a ambos, permitiendo registrar, consultar, actualizar y cancelar citas.
 
 ## Descripción del proyecto
 
-Este backend sienta la base para administrar la información del consultorio, con funcionalidades como:
+Este backend administra tres áreas centrales del consultorio:
 
-- Gestión de usuarios
-- Gestión de servicios/productos odontológicos
+- **Usuarios**: registro, autenticación (login con JWT) y gestión de pacientes/administradores, con contraseñas encriptadas mediante bcrypt
+- **Servicios**: catálogo de los tratamientos y servicios que ofrece el consultorio (nombre, descripción, categoría, precio)
+- **Citas (agenda)**: sistema de reservas que vincula a un usuario con un servicio en una fecha y hora determinada, con estados (pendiente, confirmada, cancelada, completada)
 - Conexión y persistencia de datos en MongoDB Atlas
 - Manejo de variables de entorno para credenciales sensibles
 
@@ -83,12 +86,15 @@ Backend/
     ├── config/
     │   └── dataBase.js
     ├── controllers/
+    │   ├── appointments.controllers.js
     │   ├── products.controllers.js
     │   └── users.controllers.js
     ├── models/
+    │   ├── appointments.model.js
     │   ├── products.model.js
     │   └── users.model.js
     └── routes/
+        ├── appointments.routes.js
         ├── products.routes.js
         └── users.routes.js
 ```
@@ -123,6 +129,15 @@ Backend/
 | `PUT` | `/productos/actualizar/:id` | Actualiza un servicio existente por su ID |
 | `DELETE` | `/productos/eliminar/:id` | Elimina un servicio existente por su ID |
 
+### Citas / Agenda (`/citas`)
+
+| Método | Endpoint | Descripción |
+|---|---|---|
+| `POST` | `/citas/agendar` | Agenda una nueva cita, vinculando un usuario con un servicio |
+| `GET` | `/citas/mostrar` | Obtiene todas las citas agendadas, con la información del usuario y servicio relacionados |
+| `PUT` | `/citas/actualizar/:id` | Actualiza una cita existente por su ID (por ejemplo, cambiar el estado o la fecha) |
+| `DELETE` | `/citas/eliminar/:id` | Elimina una cita existente por su ID |
+
 ## Variables de entorno
 
 | Variable | Descripción |
@@ -139,4 +154,4 @@ Backend/
 
 ## Estado del proyecto
 
-En desarrollo. Esta entrega implementa la funcionalidad CRUD completa (crear, leer, actualizar y eliminar) para los modelos de Usuario y Servicios, junto con autenticación básica mediante JWT. Las siguientes iteraciones incluirán pruebas de endpoints con Postman y mejoras adicionales de seguridad y validación.
+🚧 En desarrollo. Esta entrega implementa la funcionalidad CRUD completa (crear, leer, actualizar y eliminar) para los modelos de Usuario, Servicios y Citas, junto con autenticación básica mediante JWT. El modelo de Citas relaciona usuarios y servicios para representar el flujo real de agendamiento del consultorio. Las siguientes iteraciones incluirán mejoras adicionales de seguridad, validación y lógica de negocio (por ejemplo, evitar solapamiento de horarios).
