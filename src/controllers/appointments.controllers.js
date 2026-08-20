@@ -3,6 +3,20 @@ import { appointmentModel } from '../models/appointments.model.js';
 // petición POST -> crear una cita nueva
 export async function createAppointment(request, response) {
     try {
+        const { date } = request.body;
+
+        // Validación -> verificar si ya existe una cita agendada en esa misma fecha y hora
+        const existingAppointment = await appointmentModel.findOne({
+            date: date,
+            status: { $ne: 'cancelada' } // ignoramos las citas ya canceladas
+        });
+
+        if (existingAppointment) {
+            return response.status(409).json({
+                mensaje: 'Ya existe una cita agendada en la fecha y hora seleccionadas'
+            });
+        }
+
         const newAppointment = await appointmentModel.create(request.body);
 
         return response.status(200).json({
