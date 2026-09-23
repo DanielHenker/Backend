@@ -17,6 +17,13 @@ app.use(cors()); // permite que el servidor acepte solicitudes de otros dominios
 
 app.use(express.json()); // permite que el servidor entienda los datos en formato JSON
 
+// Evita que el navegador guarde en caché las respuestas de la API.
+// Sin esto, peticiones GET (como /productos/mostrar) pueden responder
+// con un 304 Not Modified y el frontend se queda con datos viejos.
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-store');
+  next();
+});
 
 // 3. crear las rutas necesarias para el servidor
 app.get('/', (req, res) => {
