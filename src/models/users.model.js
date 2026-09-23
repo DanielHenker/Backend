@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    phone: {
+        type: String,
+        required: true
+    },
     role: {
         type: String,
         enum: ['admin', 'usuario'],
@@ -25,4 +29,3 @@ const userSchema = new mongoose.Schema({
 
 // 3. Exportar el modelo
 export const userModel = mongoose.model('User', userSchema);
-
