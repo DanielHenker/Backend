@@ -10,12 +10,10 @@ import express from 'express';
 export const productsRouter = express.Router();
 
 // 2. crear las rutas por cada controlador
-
-// Ver los servicios es público (lo necesita la página "Servicios" para cualquier visitante)
+// Ver el catálogo de servicios es público: cualquier visitante debe poder verlo
 productsRouter.get('/mostrar', getProduct);
 
-// Crear, editar y eliminar servicios solo lo puede hacer un administrador
+// Crear, editar o eliminar servicios: solo administradores
 productsRouter.post('/crear', verificarToken, verificarAdmin, postProduct);
 productsRouter.put('/actualizar/:id', verificarToken, verificarAdmin, putProductById);
 productsRouter.delete('/eliminar/:id', verificarToken, verificarAdmin, deleteProductById);
-

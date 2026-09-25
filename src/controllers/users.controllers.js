@@ -49,8 +49,8 @@ export async function createUser(request, response) {
 export const showUsers = async (req, res) => {
   // manejo de errores -> atrapar lo que pueda salir mal
   try {
-    // Encontrar TODOS los usuarios (sin la contraseña encriptada:
-    // ni siquiera un administrador necesita verla)
+    // Encontrar TODOS los usuarios (excluyendo el hash de la contraseña,
+    // que nunca debe salir de la base de datos, ni siquiera hacia el admin)
     let users = await userModel.find().select('-password');
     // validación si no se encuentran usuarios almacenados
     if(users.length === 0){

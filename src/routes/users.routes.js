@@ -12,16 +12,14 @@ export const userRouter = express.Router();
 
 
 // 2. crear las rutas por cada controlador
-
-// Rutas públicas
+// Registro e inicio de sesión son públicos (nadie tiene token todavía)
 userRouter.post('/registrar', createUser);
 userRouter.post('/iniciar-sesion', loginUser);
 
-// Rutas protegidas: solo administradores pueden listar o eliminar usuarios
+// Ver el listado de usuarios y eliminar cuentas: solo administradores
 userRouter.get('/mostrar', verificarToken, verificarAdmin, showUsers);
 userRouter.delete('/eliminar/:id', verificarToken, verificarAdmin, deleteUserById);
 
-// Actualizar: cualquier usuario logueado puede editar su propia cuenta,
-// pero solo un administrador puede editar la de otra persona o cambiar roles
-// (la validación exacta se hace dentro del controlador)
+// Actualizar: solo hace falta estar logueado; el propio controlador
+// (updateUserById) valida si eres el dueño de la cuenta o un administrador
 userRouter.put('/actualizar/:id', verificarToken, updateUserById);
