@@ -163,7 +163,7 @@ export const updateUserById = async (req, res) => {
       dataForUpdate.password = await bcrypt.hash(dataForUpdate.password, 10);
     }
 
-    const userUpdated = await userModel.findByIdAndUpdate(idForUpdate, dataForUpdate, { new: true });
+    const userUpdated = await userModel.findByIdAndUpdate(idForUpdate, dataForUpdate, { returnDocument: 'after' });
 
     if (!userUpdated) {
       return res.status(404).json({
