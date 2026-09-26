@@ -96,7 +96,7 @@ export const updateAppointmentById = async (request, response) => {
             });
         }
 
-        const appointmentUpdated = await appointmentModel.findByIdAndUpdate(idForUpdate, dataForUpdate, { new: true });
+        const appointmentUpdated = await appointmentModel.findByIdAndUpdate(idForUpdate, dataForUpdate, { returnDocument: 'after' });
 
         return response.status(200).json({
             mensaje: 'Se actualizó la cita correctamente',
